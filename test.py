@@ -1,1 +1,1 @@
-ihr könnt alles!
+ihr könnt nichts!
