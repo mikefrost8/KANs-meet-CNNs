@@ -16,3 +16,6 @@ training:
     type: 'Adam'
     parameters:
       lr: 0.001
+
+results:
+  name: 'experiment 1'
