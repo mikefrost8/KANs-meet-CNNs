@@ -1,1 +1,1 @@
-# KAN-meets-CNN
+# KANs-meet-CNNs
