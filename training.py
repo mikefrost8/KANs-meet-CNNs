@@ -59,7 +59,7 @@ for epoch in range(config['training']['epochs']):
     epochs.append(epoch)
     losses.append(loss)
 
-# Save results
+# Save results and corresponding yaml file
 plt.plot(epochs, loss)
 
 name = config['results']['path']
@@ -70,5 +70,10 @@ os.makedirs(full_path, exist_ok=True)
 filename='loss_per_epoch.pdf'
 file_path = os.path.join(full_path, filename)
 plt.savefig(file_path, format='pdf')
+
+yaml_path = os.path.join(full_path, 'config.yaml')
+
+with open(yaml_path, 'w') as file:
+    yaml.safe_dump(config, file)
 
 plt.show()
