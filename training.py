@@ -62,7 +62,7 @@ for epoch in range(config['training']['epochs']):
 # Save results and corresponding yaml file
 plt.plot(epochs, loss)
 
-name = config['results']['path']
+name = config['results']['name']
 
 full_path = os.path.join('experiments', name)
 os.makedirs(full_path, exist_ok=True)
