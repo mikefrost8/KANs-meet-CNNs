@@ -1,0 +1,15 @@
+model:
+  module_path: models.VanillaCNN
+  type: VanillaCNN
+results:
+  name: experiment_1
+training:
+  batch_size: 64
+  criterion:
+    type: CrossEntropyLoss
+  epochs: 10
+  learning_rate: 0.001
+  optimizer:
+    parameters:
+      lr: 0.001
+    type: Adam

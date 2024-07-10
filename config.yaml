@@ -1,21 +1,42 @@
-model:
-  Type: 'CNN'
-  module_path: 'CNN'
-  input_size: [3, 84, 84]
-  num_classes: 100
+# model:
+#   type: 'VanillaCNN'
+#   module_path: 'models/VanillaCNN.py'
+#   # input_size: [3, 84, 84]
+#   num_classes: 10
   
+# training:
+#   learning_rate: 0.001
+#   batch_size: 64
+#   epochs: 10
+  
+#   criterion:
+#     type: 'CrossEntropyLoss'
+  
+#   optimizer:
+#     type: 'Adam'
+#     parameters:
+#       lr: 0.001
+
+# results:
+#   name: 'experiment_1'
+
+model:
+  module_path: 'models.VanillaCNN'
+  type: 'VanillaCNN'
+
 training:
   learning_rate: 0.001
   batch_size: 64
   epochs: 10
-  
-  criterion:
-    type: 'CrossEntropyLoss'
-  
+
   optimizer:
     type: 'Adam'
     parameters:
       lr: 0.001
+      # momentum: 0.9 (Adam doesn't use momentum! It uses beta1 & beta2 instead)
+
+  criterion:
+    type: 'CrossEntropyLoss'
 
 results:
-  name: 'experiment 1'
+  name: 'experiment_1'
