@@ -1,0 +1,9 @@
+model:
+  module_path: 'models.VanillaCNN'
+  type: 'VanillaCNN'
+
+criterion:
+  type: 'accuracy'
+
+experiment:
+  name: 'experiment_1'
