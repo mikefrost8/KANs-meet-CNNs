@@ -1,33 +1,18 @@
-# model:
-#   type: 'VanillaCNN'
-#   module_path: 'models/VanillaCNN.py'
-#   # input_size: [3, 84, 84]
-#   num_classes: 10
-  
-# training:
-#   learning_rate: 0.001
-#   batch_size: 64
-#   epochs: 10
-  
-#   criterion:
-#     type: 'CrossEntropyLoss'
-  
-#   optimizer:
-#     type: 'Adam'
-#     parameters:
-#       lr: 0.001
+model_type: 'Vanilla' # 'Vanilla'
 
-# results:
-#   name: 'experiment_1'
-
-model:
-  module_path: 'models.VanillaCNN'
-  type: 'VanillaCNN'
+models:
+  KAN:
+    module_path: 'models.KAN_CNN'
+    type: 'KANCNN'
+    activation_class: 'LearnableActivationSigmoid'
+  Vanilla:
+    module_path: 'models.VanillaCNN'
+    type: 'VanillaCNN'
 
 training:
   learning_rate: 0.001
   batch_size: 64
-  epochs: 10
+  epochs: 15
 
   optimizer:
     type: 'Adam'
@@ -39,4 +24,4 @@ training:
     type: 'CrossEntropyLoss'
 
 results:
-  name: 'experiment_1'
+  name: 'experiment_2'

@@ -18,8 +18,23 @@ import pandas as pd
 
 from tqdm import tqdm
 
+from models.ActFuncs import LearnableActivationReLU, LearnableActivationSigmoid
+
+
+# Helper method
+def get_activation_class(name):
+    if name == 'LearnableActivationReLU':
+        return LearnableActivationReLU
+    elif name == 'LearnableActivationSigmoid':
+        return LearnableActivationSigmoid
+    else:
+        raise ValueError(f"Unknown activation class: {name}")
+
 
 def train(config):
+
+    model_type = config['model_type']
+    model_info = config['models'][model_type]
 
     # Load and transform data
     transform = transforms.Compose([
@@ -35,10 +50,21 @@ def train(config):
     # Initialize device
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
+    # Dynamic activation class fetching based on configuration
+    activation_class = None
+    if 'activation_class' in model_info:
+        activation_class = get_activation_class(model_info['activation_class'])
+
     # Initialize model
-    model_dyn = importlib.import_module(config['model']['module_path'])
-    model_class = getattr(model_dyn, config['model']['type'])
-    model = model_class()
+    model_dyn = importlib.import_module(model_info['module_path'])
+    model_class = getattr(model_dyn, model_info['type'])
+    
+    # Initialize model with potential custom activation
+    if activation_class:
+        model = model_class(num_classes=10, activation_class=activation_class())
+    else:
+        model = model_class(num_classes=10)
+
     model.to(device)
 
 
@@ -120,13 +146,3 @@ def train(config):
     with open(results_csv_path, 'a') as f:
         f.write(f"\nTotal training time:, {total_minutes} minutes, {total_seconds} seconds\n")
     plt.show()
-
-
-def main():
-     # Load config file
-    with open('config.yaml', 'r') as file:
-        config = yaml.safe_load(file)
-    train(config)
-
-if __name__ == '__main__':
-    main()
