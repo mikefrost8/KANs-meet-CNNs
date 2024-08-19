@@ -1,6 +1,7 @@
 import argparse
 import yaml
 import training
+import training_KAN
 import test
 
 def main():
@@ -14,7 +15,8 @@ def main():
         config = yaml.safe_load(file)
 
     if args.mode == 'train':
-        training.train(config)
+        training_KAN.train(config)
+        #training.train(config)
     elif args.mode == 'test':
         test.test()  # Assuming the test module has a function called 'test'
 

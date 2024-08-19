@@ -1,18 +1,35 @@
-model_type: 'Vanilla' # 'Vanilla'
+model_type: 'KAN' # 'Vanilla'
 
 models:
   KAN:
     module_path: 'models.KAN_CNN'
     type: 'KANCNN'
-    activation_class: 'LearnableActivationSigmoid'
+    activation_class: 'LearnableActivationReLU' # 'LearnableActivationSigmoid'
+
+    activation_params:
+      - in_features: 64
+        hidden_features: 32
+      - in_features: 192
+        hidden_features: 96
+      - in_features: 384
+        hidden_features: 192
+      - in_features: 256
+        hidden_features: 128
+      - in_features: 256
+        hidden_features: 128
+      - in_features: 4096
+        hidden_features: 2048
+      - in_features: 4096
+        hidden_features: 2048
+
   Vanilla:
     module_path: 'models.VanillaCNN'
     type: 'VanillaCNN'
 
 training:
   learning_rate: 0.001
-  batch_size: 64
-  epochs: 15
+  batch_size: 1
+  epochs: 1
 
   optimizer:
     type: 'Adam'
@@ -24,4 +41,4 @@ training:
     type: 'CrossEntropyLoss'
 
 results:
-  name: 'experiment_2'
+  name: 'experiment_KAN_1'
